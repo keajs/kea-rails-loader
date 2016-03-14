@@ -1,0 +1,19 @@
+{
+  "name": "kea-ruby-loader",
+  "version": "0.1.0",
+  "description": "load ruby controllers in webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mariusandra/kea-ruby-loader.git"
+  },
+  "author": "Marius Andra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mariusandra/kea-ruby-loader/issues"
+  },
+  "homepage": "https://github.com/mariusandra/kea-ruby-loader#readme"
+}
