@@ -14,7 +14,7 @@ module.exports = function (source) {
       methods.push(line.replace(/^ +def /, ''))
     }
 
-    if (line.match(/^ *private$/) || line.match(/^ *protected$/)) {
+    if (line.match(/^ *private *$/) || line.match(/^ *protected *$/)) {
       break
     }
   }
@@ -33,9 +33,9 @@ module.exports = function (source) {
     }
 
     exportable.push(
-      method + ': function(' + params.join(', ') + ') { return $.ajax({method: "post", url: "/_kea", data: ' +
-      '{endpoint: "' + className + '", method: "' + method + '", data: {' +
-      params.map(p => p + ': ' + p).join(',') + '}}}) }'
+      method + ': function(params) { ' +
+        'return $.ajax({method: "post", url: "/_kea", data: ' + '{endpoint: "' + className + '", method: "' + method + '", params: params}}) ' +
+      '}'
     )
   }
 

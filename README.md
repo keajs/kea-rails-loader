@@ -1,16 +1,16 @@
-# kea-ruby-loader
+# kea-rails-loader
 
 This is an experimental module. Do not use with anything serious.
 
-Given a ruby file like this:
+Given a rails controller that includes `Kea::Controller` from `kea-rails` like this:
 
 ```ruby
-# at /app/bundles/search/components/result/reputation.rb
-class Bundles::Search::Components::Result::Reputation < ApplicationController
+# at /app/scenes/search/result/reputation.rb
+class Scenes::Search::Result::Reputation < ApplicationController
   include Kea::Controller
 
-  def reputation(id)
-    @user = User.find(id)
+  def reputation
+    @user = User.find(params[:id])
 
     render json: {
       id: @user.id,
@@ -21,13 +21,25 @@ class Bundles::Search::Components::Result::Reputation < ApplicationController
 end
 ```
 
-Create an object like this:
+Import and use it through webpack like this:
 
 ```js
-// at /app/bundles/search/components/result/reputation.js
+// at /app/scenes/search/result/reputation.js
 import endpoint from './reputation.rb'
 
-endpoint.reputation(this.props.id).then((response) => {
+endpoint.reputation({ id: this.props.id }).then((response) => {
   console.log(response.name)
 })
+```
+
+In your webpack config:
+
+```js
+{
+  module: {
+    loaders: [
+      { test: /\.rb$/, loader: 'kea-rails-loader' }
+    ]
+  }
+}
 ```
