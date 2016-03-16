@@ -43,3 +43,9 @@ In your webpack config:
   }
 }
 ```
+
+Optional arguments for loader with defaults: `?camelize=true&engine=$`
+
+`camelize` - should the function names be camelized? `endpoint.add_favourite()` gets turned into `endpoint.addFavourite()`
+
+`engine` - what to use to do the request. Currently only `$` and `jQuery` are supported. `$` is the default. The engine must be globally exposed to the loader.
