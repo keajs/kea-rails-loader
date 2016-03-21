@@ -4,9 +4,9 @@ function camelize (str) {
   }).replace(/\s+/g, '')
 }
 
-function fetchLineWithEngine (engine, data) {
+function fetchLineWithEngine (endpoint, engine, data) {
   if (engine === '$' || engine === 'jQuery') {
-    return 'return ' + engine + '.ajax({method: "post", url: "/_kea.json", data: ' + data + '})'
+    return 'return ' + engine + '.ajax({method: "post", url: "' + endpoint + '", data: ' + data + '})'
   }
 }
 
@@ -27,6 +27,9 @@ module.exports = function (source) {
   }
   if (!args.camelize) {
     args.camelize = 'true'
+  }
+  if (!args.endpoint) {
+    args.endpoint = '/_kea.json'
   }
 
   // fetch methods
@@ -60,7 +63,7 @@ module.exports = function (source) {
 
     exportable.push(
       (args.camelize === 'true' ? camelize(method) : method) + ': function (params) { ' +
-        fetchLineWithEngine(args.engine, '{endpoint: "' + className + '", method: "' + method + '", params: params}') +
+        fetchLineWithEngine(args.endpoint, args.engine, '{endpoint: "' + className + '", method: "' + method + '", params: params}') +
       '}'
     )
   }

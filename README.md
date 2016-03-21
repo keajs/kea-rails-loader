@@ -2,11 +2,11 @@
 
 This is an experimental module. Do not use with anything serious.
 
-Given a rails controller that includes `Kea::Controller` from `kea-rails` like this:
+Given a rails controller that includes `Kea::Controller` from `kea-on-rails` like this:
 
 ```ruby
-# at /app/scenes/search/result/reputation.rb
-class Scenes::Search::Result::Reputation < ApplicationController
+# at /app/scenes/search/result/controller.rb
+class Scenes::Search::Result::Controller < ApplicationController
   include Kea::Controller
 
   def reputation
@@ -25,9 +25,9 @@ Import and use it through webpack like this:
 
 ```js
 // at /app/scenes/search/result/reputation.js
-import endpoint from './reputation.rb'
+import controller from './controller.rb'
 
-endpoint.reputation({ id: this.props.id }).then((response) => {
+controller.reputation({ id: this.props.id }).then(response => {
   console.log(response.name)
 })
 ```
@@ -44,8 +44,10 @@ In your webpack config:
 }
 ```
 
-Optional arguments for loader with defaults: `?camelize=true&engine=$`
+Optional arguments for loader with defaults: `?camelize=true&engine=$&endpoint=/_kea.json`
 
 `camelize` - should the function names be camelized? `endpoint.add_favourite()` gets turned into `endpoint.addFavourite()`
 
 `engine` - what to use to do the request. Currently only `$` and `jQuery` are supported. `$` is the default. The engine must be globally exposed to the loader.
+
+`endpoint` - where does the `kea-on-rails` counterpart live?

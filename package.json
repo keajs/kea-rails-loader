@@ -1,6 +1,6 @@
 {
   "name": "kea-rails-loader",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "load rails controllers in webpack",
   "main": "index.js",
   "scripts": {
