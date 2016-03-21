@@ -6,7 +6,7 @@ function camelize (str) {
 
 function fetchLineWithEngine (engine, data) {
   if (engine === '$' || engine === 'jQuery') {
-    return 'return ' + engine + '.ajax({method: "post", url: "/_kea", data: ' + data + '})'
+    return 'return ' + engine + '.ajax({method: "post", url: "/_kea.json", data: ' + data + '})'
   }
 }
 

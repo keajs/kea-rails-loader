@@ -1,6 +1,6 @@
 {
   "name": "kea-rails-loader",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "load rails controllers in webpack",
   "main": "index.js",
   "scripts": {
@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mariusandra/kea-ruby-loader.git"
+    "url": "git+https://github.com/mariusandra/kea-rails-loader.git"
   },
   "author": "Marius Andra",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mariusandra/kea-ruby-loader/issues"
+    "url": "https://github.com/mariusandra/kea-rails-loader/issues"
   },
-  "homepage": "https://github.com/mariusandra/kea-ruby-loader#readme"
+  "homepage": "https://github.com/mariusandra/kea-rails-loader#readme"
 }
