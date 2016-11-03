@@ -7,6 +7,8 @@ function camelize (str) {
 function fetchLineWithEngine (endpoint, engine, data) {
   if (engine === '$' || engine === 'jQuery') {
     return 'return ' + engine + '.ajax({method: "post", url: "' + endpoint + '", data: ' + data + '})'
+  } else if (engine === 'fetch') {
+    return 'return fetch("' + endpoint + '", {method: "post", headers: {"Content-Type": "application/json"}, body: JSON.stringify(' + data + ')}).then(function(response) { return response.json() })'
   }
 }
 
@@ -23,7 +25,7 @@ module.exports = function (source) {
 
   // defaults
   if (!args.engine) {
-    args.engine = '$'
+    args.engine = 'fetch'
   }
   if (!args.camelize) {
     args.camelize = 'true'
