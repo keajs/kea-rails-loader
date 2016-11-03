@@ -8,7 +8,7 @@ function fetchLineWithEngine (endpoint, engine, data) {
   if (engine === '$' || engine === 'jQuery') {
     return 'return ' + engine + '.ajax({method: "post", url: "' + endpoint + '", data: ' + data + '})'
   } else if (engine === 'fetch') {
-    return 'return fetch("' + endpoint + '", {method: "post", headers: {"Content-Type": "application/json"}, body: JSON.stringify(' + data + ')}).then(function(response) { return response.json() })'
+    return 'qs = document.querySelector("meta[name=csrf-token]"); return fetch("' + endpoint + '", {method: "post", headers: {"Content-Type": "application/json", "X-CSRF-Token": qs && qs.content}, body: JSON.stringify(' + data + ')}).then(function(response) { return response.json() })'
   }
 }
 
