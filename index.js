@@ -8,7 +8,17 @@ function fetchLineWithEngine (endpoint, engine, data) {
   if (engine === '$' || engine === 'jQuery') {
     return 'return ' + engine + '.ajax({method: "post", url: "' + endpoint + '", data: ' + data + '})'
   } else if (engine === 'fetch') {
-    return 'var qs = document.querySelector("meta[name=csrf-token]"); return fetch("' + endpoint + '", {method: "post", headers: {"Accept": "application/json", "Content-Type": "application/json", "X-CSRF-Token": qs && qs.content}, body: JSON.stringify(' + data + '), credentials: "same-origin"}).then(function(response) { return response.json() })'
+    return 'var qs = document.querySelector("meta[name=csrf-token]"); ' +
+            'return fetch("' + endpoint + '", ' +
+            '{method: "post", ' +
+              'headers: {' +
+                '"Accept": "application/json", ' +
+                '"Content-Type": "application/json", ' +
+                '"X-CSRF-Token": qs && qs.content' +
+              '}, ' +
+              'body: JSON.stringify(' + data + ').replace(/[\\u007F-\\uFFFF]/g, function (c) { return "\\\\u" + ("0000" + c.charCodeAt(0).toString(16)).substr(-4); }), ' +
+              'credentials: "same-origin"' +
+            '}).then(function(response) { return response.json() })'
   }
 }
 
