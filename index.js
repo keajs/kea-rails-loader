@@ -50,7 +50,12 @@ module.exports = function (source) {
   var lines = source.split("\n")
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i]
-    if (line.match(/^class /)) {
+
+    if (line.match('# class: ') && !className) {
+      className = line.split('# class: ')[1].split('<')[0].trim()
+    }
+
+    if (line.match(/^class /) && !className) {
       className = line.split('class ')[1].split('<')[0].trim()
     }
 
