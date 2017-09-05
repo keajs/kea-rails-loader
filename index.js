@@ -46,17 +46,19 @@ module.exports = function (source) {
 
   // fetch methods
   var className = ''
+  var classFound = false
   var methods = []
   var lines = source.split("\n")
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i]
 
-    if (line.match('# class: ') && !className) {
-      className = line.split('# class: ')[1].split('<')[0].trim()
+    if (line.match(/^module /) && !classFound) {
+      className = className + line.split('module ')[1].split('<')[0].trim() + '::'
     }
 
-    if (line.match(/^class /) && !className) {
-      className = line.split('class ')[1].split('<')[0].trim()
+    if (line.match(/^class /) && !classFound) {
+      className = className + line.split('class ')[1].split('<')[0].trim()
+      classFound = true
     }
 
     if (line.match(/^ +def /)) {
